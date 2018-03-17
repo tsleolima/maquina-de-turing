@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Máquina de Turing</title>
+</head>
+<body ng-controller="maquinaTuringController">
+
+    <div>
+        <p>{{fita}}</p>
+        <p>{{passos}}</p>
+        <textarea ng-model="programa" style="width: 700px; height: 450px; resize: none;"></textarea>
+        <label for="palavra">Digite a palavra</label>
+        <input type="text" id="palavra" ng-model="palavra">
+        <button ng-click="operar(programa,palavra)">Operar</button>
+        
+
+    </div>  
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
+    <script src="js/module.js"></script>
+    <script src="js/services/fitaService.js"></script>
+    <script src="js/services/estadoService.js"></script>
+    <script src="js/controller/maquinaTuringController.js"></script>
+</body>
+</html>
