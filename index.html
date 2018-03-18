@@ -8,6 +8,7 @@
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
 	 crossorigin="anonymous">
 	<link rel="stylesheet" href="css/style.css">
+	<link rel="shortcut icon" type="image/x-icon" href="imagens/machine.jpg" />
 	<title>Simulador de Máquina de Turing</title>
 </head>
 
@@ -57,17 +58,22 @@
 					</div>
 				</div>
 
-				<div class="row">
-					<div class="col-md-10">
-						<textarea class="form-control mx-auto" aria-label="With textarea" id="txtarea"></textarea>
+				<div class="row" id="in">
+					<div class="col-md-8">
+						<textarea ng-model="programa" class="form-control mx-auto" aria-label="With textarea" id="txtarea"></textarea>
 					</div>
-					<div class="col-md-2">
+					<div class="col-md-4">
 						<div class="input-group mb-3" id="palavra">
 							<div class="input-group-prepend">
 								<span class="input-group-text" id="inputGroup-sizing-default">Palavra</span>
 							</div>
-							<input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+							<input ng-model="palavra" style="margin-right:1px" type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
 						</div>
+						<button ng-click="operar(palavra)" type="button" class="btn btn-outline-success">Rodar</button>
+						<button ng-click="pausar()" type="button" class="btn btn-outline-secondary">Pausar</button>
+						<button ng-click="passoApasso(palavra)" type="button" class="btn btn-outline-primary">Passo a Passo</button>
+						<button ng-click="resetar()" type="button" class="btn btn-outline-danger">Resetar</button>
+						<button ng-click="instalarPrograma(programa,palavra)" type="button" class="btn btn-outline-warning" style="margin-top:10px">Instalar Programa</button>
 					</div>
 				</div>
 			</div>

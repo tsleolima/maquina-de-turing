@@ -1,23 +1,37 @@
 app.controller('maquinaTuringController', maquinaTuringController);
 
-maquinaTuringController.$inject = ['$scope', 'estadoService', 'fitaService'];
+maquinaTuringController.$inject = ['$scope', 'estadoService', 'fitaService', '$interval'];
 
-function maquinaTuringController($scope, estadoService, fitaService) {
+function maquinaTuringController($scope, estadoService, fitaService, $interval) {
 
     var estadosFinais = [];
     var estados = [];
     var estadoInicial = estadoService.criarEstado("0");
     var estadoAtual = estadoInicial;
-    $scope.fita = "Aqui está a palavra";
+    $scope.fita = "Aqui fica a palavra";
     $scope.passos = 0;
     $scope.estadoAtual = "0";
 
 
-    $scope.operar = function (arquivo, palavra) {
-        criarSintaxe(arquivo);        
-        escreverPalavra(palavra);
-        execucaoRapida();
-        printResultado();
+    $scope.operar = function (palavra) {
+        if (estadoService.getEstados().length !== 1) {
+            escreverPalavra(palavra);
+            execucaoRapida();
+            printResultado();
+        } else {
+            window.alert("Primeiro instale o programa!");
+        }
+    }
+
+    $scope.resetar = function () {
+        fitaService.novaFita();
+        estadoService.resetar();
+        estadoInicial = estadoService.criarEstado("0");
+        estados = [];
+        $scope.passos = 0;
+        $scope.estadoAtual = "0";
+        $scope.fita = "Aqui fica a palavra"
+        window.alert('Programa desinstalado');
     }
 
     var printResultado = function () {
@@ -33,10 +47,10 @@ function maquinaTuringController($scope, estadoService, fitaService) {
         $scope.fita = fitaFinal;
     }
 
-    var percorrerPorPassos = function () {
+    function percorrerPorPassos() {
 
-        estados = estadoService.getEstados();        
-        $scope.estadoAtual = estadoAtual;
+        estados = estadoService.getEstados();
+        $scope.estadoAtual = estadoAtual.nome;
         var transicao = estadoService.getTransicao(estadoAtual.nome, fitaService.getSimboloAtual());
         if (transicao == null) {
             transicao = estadoService.getTransicao(estadoAtual.nome, "*");
@@ -45,7 +59,6 @@ function maquinaTuringController($scope, estadoService, fitaService) {
                 return;
             }
         }
-        
 
         if (transicao.simboloEscrita !== "*") {
             fitaService.escreverSimbolo(transicao.simboloEscrita);
@@ -54,18 +67,35 @@ function maquinaTuringController($scope, estadoService, fitaService) {
         if (!transicao.novoEstado.nome !== "*") {
             estadoAtual = transicao.novoEstado;
         }
-        
+
         $scope.passos++;
-        $scope.fita = fitaService.getFita();
+        printResultado();
     }
 
     var estadoAtualEstaEmEstadosFinais = function () {
         for (let index = 0; index < estadosFinais.length; index++) {
-            if (estadosFinais[index].nome === estadoAtual.nome) {        
+            if (estadosFinais[index].nome === estadoAtual.nome) {
                 return true;
             }
         }
         return false;
+    }
+
+    $scope.instalarPrograma = function (arquivo) {
+        criarSintaxe(arquivo);        
+        window.alert('Programa instalado!');
+    }
+
+    $scope.passoApasso = function (palavra) {
+        if(estadoService.getEstados().length !== 1) {
+            if (fitaService.getFita().length !== 0) {                
+                percorrerPorPassos();                
+            } else {
+                escreverPalavra(palavra);
+            }
+        } else {
+            window.alert("Primeiro instale o programa!");
+        }
     }
 
     var execucaoRapida = function () {
@@ -78,7 +108,7 @@ function maquinaTuringController($scope, estadoService, fitaService) {
 
         var funcoesTransicao = arquivo.split("\n");
         for (let index = 0; index < funcoesTransicao.length; index++) {
-            if (funcoesTransicao[index] !== "" && funcoesTransicao[index][0] !== ";") {                
+            if (funcoesTransicao[index] !== "" && funcoesTransicao[index][0] !== ";") {
                 var linha = funcoesTransicao[index].split(" ");
                 var estadoPrimario = linha[0];
                 var simboloLeitura = linha[1];
@@ -91,24 +121,24 @@ function maquinaTuringController($scope, estadoService, fitaService) {
     }
 
 
-    var adicionarTransicao = function (nomeEstadoPrimario, simboloLeitura, simboloEscrita, direcao, nomeEstadoSecundario) {        
+    var adicionarTransicao = function (nomeEstadoPrimario, simboloLeitura, simboloEscrita, direcao, nomeEstadoSecundario) {
         var estadoPrimario = criarEstado(nomeEstadoPrimario);
-        var estadoSecundario = criarEstado(nomeEstadoSecundario);        
-                
+        var estadoSecundario = criarEstado(nomeEstadoSecundario);
+
         var transicao = {};
         transicao.simboloLeitura = simboloLeitura;
         transicao.simboloEscrita = simboloEscrita;
         transicao.direcao = direcao;
         transicao.novoEstado = estadoSecundario;
-        estadoService.adicionarTransicao(nomeEstadoPrimario, transicao);        
+        estadoService.adicionarTransicao(nomeEstadoPrimario, transicao);
     }
 
     var criarEstado = function (nomeEstado) {
         var estado = estadoService.criarEstado(nomeEstado);
-        if (nomeEstado.includes("halt")) {            
+        if (nomeEstado.includes("halt")) {
             estadosFinais.push(estado);
-        }        
-        
+        }
+
         estados.push(estado);
         return estado;
     }
@@ -116,7 +146,7 @@ function maquinaTuringController($scope, estadoService, fitaService) {
     var escreverPalavra = function (palavra) {
         fitaService.novaFita();
         $scope.passos = 0;
-        estadoAtual = estadoInicial;        
+        estadoAtual = estadoInicial;
         fitaService.escreverPalavra(palavra);
     }
 

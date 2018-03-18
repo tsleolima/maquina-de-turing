@@ -39,7 +39,7 @@ p {
 
 #txtarea {
     width: 700px;
-    height: 450px; 
+    height: 350px; 
     resize: none;
     background-color: white;
 }
@@ -56,4 +56,12 @@ div #machine {
 
 #palavra {
     margin-right: 10px;
+}
+
+#in {
+    margin-top: 20px;
+}
+
+#entrada {
+    margin-right: 20px;
 }

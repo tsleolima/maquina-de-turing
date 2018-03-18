@@ -24,6 +24,10 @@ function estadoService() {
         return estadoPesquisado;
     }
 
+    this.resetar = function () {
+        estados = [];
+    }
+
     this.getTransicao = function (nomeEstado, simboloFita) {
         var estado = buscaEstado(nomeEstado);
         for (let index = 0; index < estado.transicoes.length; index++) {
