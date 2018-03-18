@@ -8,8 +8,9 @@ function maquinaTuringController($scope, estadoService, fitaService) {
     var estados = [];
     var estadoInicial = estadoService.criarEstado("0");
     var estadoAtual = estadoInicial;
-    $scope.fita = "";
+    $scope.fita = "Aqui está a palavra";
     $scope.passos = 0;
+    $scope.estadoAtual = "0";
 
 
     $scope.operar = function (arquivo, palavra) {
@@ -35,7 +36,7 @@ function maquinaTuringController($scope, estadoService, fitaService) {
     var percorrerPorPassos = function () {
 
         estados = estadoService.getEstados();        
-
+        $scope.estadoAtual = estadoAtual;
         var transicao = estadoService.getTransicao(estadoAtual.nome, fitaService.getSimboloAtual());
         if (transicao == null) {
             transicao = estadoService.getTransicao(estadoAtual.nome, "*");

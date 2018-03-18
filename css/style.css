@@ -1,0 +1,59 @@
+body {
+    margin-top: 15px;
+    text-align: center;
+    text-shadow: 0 0.05rem 0.1rem rgba(0,0,0,.5);
+    font-family: -apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    background-color: #1C1C1C;
+
+}
+
+#menu {
+    margin-bottom: 40px;
+}
+
+.programa {
+    font-size: 20px;
+    color: black;
+    margin-top: 10px;
+    margin-bottom: -10px;
+}
+
+p {
+    color: white;
+}
+
+.fita {
+    color: #1C1C1C;
+    font-size: 30px;
+    margin-top: 1%;
+}
+
+.nomeFita {
+    color: white;
+    font-size: 30px;
+    margin-bottom: -5px;
+}
+
+#txtarea {
+    width: 700px;
+    height: 450px; 
+    resize: none;
+    background-color: white;
+}
+
+div .mx-auto {
+    border-radius: 5px;
+    background-color: #FAFAFF;
+}
+
+div #machine {
+    margin-top: 20px;
+    background-color: #FAFAFF;
+}
+
+#palavra {
+    margin-right: 10px;
+}

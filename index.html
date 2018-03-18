@@ -1,28 +1,93 @@
 <!DOCTYPE html>
-<html lang="en" ng-app="myApp">
+<html lang="br" ng-app="myApp">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Máquina de Turing</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+	 crossorigin="anonymous">
+	<link rel="stylesheet" href="css/style.css">
+	<title>Simulador de Máquina de Turing</title>
 </head>
+
 <body ng-controller="maquinaTuringController">
 
-    <div>
-        <p>{{fita}}</p>
-        <p>{{passos}}</p>
-        <textarea ng-model="programa" style="width: 700px; height: 450px; resize: none;"></textarea>
-        <label for="palavra">Digite a palavra</label>
-        <input type="text" id="palavra" ng-model="palavra">
-        <button ng-click="operar(programa,palavra)">Operar</button>
-        
+	<div class="container-fluid">
+		<div class="row" id="menu">
+			<div class="col-md-8">
+				<h1 style="color:white"> Simulador de Máquina de Turing
+				</h1>
+			</div>
+			<div class="col-md-4">
+				<ul class="nav justify-content-end">
+					<li class="nav-item">
+						<a class="nav-link active" href="#" style="color:white;font-size:25px">Inicio</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="#" style="color:white;font-size:25px">Saiba mais</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="#" style="color:white;font-size:25px">Contato</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-12">
+				<p class="nomeFita">Fita</p>
+			</div>
+			<div class="mx-auto" style="width: 1000px;">
+				<p class="fita">{{fita}}</p>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-11 border border-light mx-auto" id="machine">
+				<div class="row">
+					<div class="col-md-2">
+						<p class="programa">Estado atual</p>
+						<p class="programa">{{estadoAtual}}</p>
+					</div>
+					<div class="col-md-8">
+						<p class="programa">Escreva aqui o seu programa</p>
+					</div>
+					<div class="col-md-2">
+						<p class="programa">Passos</p>
+						<p class="programa">{{passos}}</p>
+					</div>
+				</div>
 
-    </div>  
+				<div class="row">
+					<div class="col-md-10">
+						<textarea class="form-control mx-auto" aria-label="With textarea" id="txtarea"></textarea>
+					</div>
+					<div class="col-md-2">
+						<div class="input-group mb-3" id="palavra">
+							<div class="input-group-prepend">
+								<span class="input-group-text" id="inputGroup-sizing-default">Palavra</span>
+							</div>
+							<input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
-    <script src="js/module.js"></script>
-    <script src="js/services/fitaService.js"></script>
-    <script src="js/services/estadoService.js"></script>
-    <script src="js/controller/maquinaTuringController.js"></script>
+	<!-- Import scripts AngularJs -->
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
+	<script src="js/module.js"></script>
+	<script src="js/services/fitaService.js"></script>
+	<script src="js/services/estadoService.js"></script>
+	<script src="js/controller/maquinaTuringController.js"></script>
+
+	<!-- Import bootstrap js -->
+	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+	 crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+	 crossorigin="anonymous"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+	 crossorigin="anonymous"></script>
 </body>
+
 </html>
