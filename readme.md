@@ -12,3 +12,7 @@ Como Executar o projeto:
 
 Em desenvolvimento por:
         Leonardo Lima Felix da Silva
+        Pedro Wanderley
+        Gustavo Victor
+        Luis Henrique
+        Thallyson Alves

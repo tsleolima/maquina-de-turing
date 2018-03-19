@@ -71,7 +71,7 @@ function maquinaTuringController($scope, estadoService, fitaService, $timeout) {
             fitaService.escreverSimbolo(transicao.simboloEscrita);
         }
         fitaService.andar(transicao.direcao);
-        if (!transicao.novoEstado.nome !== "*") {
+        if (transicao.novoEstado.nome !== "*") {
             estadoAtual = transicao.novoEstado;
         }
 
@@ -97,7 +97,7 @@ function maquinaTuringController($scope, estadoService, fitaService, $timeout) {
         if(estadoService.getEstados().length !== 1) {
             if (fitaService.getFita().length !== 0) {
                 if (estadoAtualEstaEmEstadosFinais() == false) {
-                    $timeout(executarPorVez,500);    
+                    $timeout(executarPorVez,1);    
                 }
             } else {
                 escreverPalavra(palavra);
