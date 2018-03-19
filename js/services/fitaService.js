@@ -44,6 +44,10 @@ function fitaService() {
         }
         cabecote--;
     }
+    
+    this.getCabecote = function () {
+        return cabecote;
+    }
 
     var andarParaDireita = function () {
         if (cabecote === palavra.length - 1) {

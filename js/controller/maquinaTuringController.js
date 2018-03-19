@@ -1,8 +1,8 @@
 app.controller('maquinaTuringController', maquinaTuringController);
 
-maquinaTuringController.$inject = ['$scope', 'estadoService', 'fitaService', '$interval'];
+maquinaTuringController.$inject = ['$scope', 'estadoService', 'fitaService', '$timeout'];
 
-function maquinaTuringController($scope, estadoService, fitaService, $interval) {
+function maquinaTuringController($scope, estadoService, fitaService, $timeout) {
 
     var estadosFinais = [];
     var estados = [];
@@ -11,6 +11,7 @@ function maquinaTuringController($scope, estadoService, fitaService, $interval) 
     $scope.fita = "Aqui fica a palavra";
     $scope.passos = 0;
     $scope.estadoAtual = "0";
+    $scope.cabecote = "";
 
 
     $scope.operar = function (palavra) {
@@ -36,14 +37,20 @@ function maquinaTuringController($scope, estadoService, fitaService, $interval) 
 
     var printResultado = function () {
         var fitaFinal = "";
+        $scope.cabecote = "";
         var fitaList = fitaService.getFita();
         for (let index = 0; index < fitaList.length; index++) {
             if (fitaList[index] === '_') {
-                fitaFinal += ' '
             } else {
                 fitaFinal += fitaList[index];
             }
         }
+
+        for (var index = 0; index < fitaService.getCabecote() -1; index++) {
+            $scope.cabecote += " ";
+        }
+
+        $scope.cabecote += "^";
         $scope.fita = fitaFinal;
     }
 
@@ -88,8 +95,10 @@ function maquinaTuringController($scope, estadoService, fitaService, $interval) 
 
     $scope.passoApasso = function (palavra) {
         if(estadoService.getEstados().length !== 1) {
-            if (fitaService.getFita().length !== 0) {                
-                percorrerPorPassos();                
+            if (fitaService.getFita().length !== 0) {
+                if (estadoAtualEstaEmEstadosFinais() == false) {
+                    $timeout(executarPorVez,500);    
+                }
             } else {
                 escreverPalavra(palavra);
             }
@@ -99,9 +108,14 @@ function maquinaTuringController($scope, estadoService, fitaService, $interval) 
     }
 
     var execucaoRapida = function () {
-        while (!estadoAtualEstaEmEstadosFinais()) {
+        while (estadoAtualEstaEmEstadosFinais() == false) {
             percorrerPorPassos();
         }
+    }
+    
+    var executarPorVez = function() {
+        percorrerPorPassos();
+     
     }
 
     var criarSintaxe = function (arquivo) {

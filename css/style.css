@@ -42,6 +42,7 @@ p {
     height: 350px; 
     resize: none;
     background-color: white;
+    margin-bottom: 40px;
 }
 
 div .mx-auto {
